@@ -18,11 +18,6 @@ class User {
 
 // es.2
 
-const petNameInput = document.getElementById("petName");
-const ownerNameInput = document.getElementById("ownerName");
-const speciesInput = document.getElementById("species");
-const breedInput = document.getElementById("breed");
-
 class Pet {
   constructor(_petName, _ownerName, _species, _breed) {
     this.petName = _petName;
@@ -31,6 +26,13 @@ class Pet {
     this.breed = _breed;
   }
 }
+
+const petNameInput = document.getElementById("petName");
+const ownerNameInput = document.getElementById("ownerName");
+const speciesInput = document.getElementById("species");
+const breedInput = document.getElementById("breed");
+const petList = document.getElementById("pet-list");
+const listItem2 = document.getElementsByClassName("list-group-item");
 
 const form = document.getElementById("pet-form");
 
@@ -42,6 +44,13 @@ form.addEventListener("submit", function (e) {
     speciesInput.value,
     breedInput.value
   );
-  console.log("Pet salvato", pet);
+  addPetToList(pet);
   form.reset();
 });
+
+function addPetToList(pet) {
+  const listItem = document.createElement("li");
+  listItem.className = "list-group-item";
+  listItem.textContent = `Nome: ${pet.petName}, Padrone: ${pet.ownerName}, Specie: ${pet.species}, Razza: ${pet.breed}`;
+  petList.appendChild(listItem);
+}
